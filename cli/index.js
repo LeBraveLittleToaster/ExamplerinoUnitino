@@ -97,7 +97,6 @@ ws.on('connection', (connection) => {
     connection.send(createStartUpMessage(gb));
 });
 
-// Run it with top-level await
 console.clear();
 await welcome();
 while (true) {
