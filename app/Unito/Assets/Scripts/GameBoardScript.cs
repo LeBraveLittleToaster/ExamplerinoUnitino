@@ -1,39 +1,83 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class GameBoardScript : MonoBehaviour
 {
+    private static readonly System.Random getRandom = new System.Random();
     public delegate void OnGameBoardRebuild(int x, int y, float spacingX, float spacingY);
 
     public static event OnGameBoardRebuild onGameBoardRebuild;
-    
+
     [SerializeField] private Transform redPrefab;
     [SerializeField] private Transform greenPrefab;
     [SerializeField] private Transform bluePrefab;
     [SerializeField] private float spacingX;
     [SerializeField] private float spacingY;
+    [SerializeField] private Transform playerPrefab;
 
     private List<List<LogicTile>> _tiles = new List<List<LogicTile>>();
     private List<Transform> tileInstances = new List<Transform>();
+    private Dictionary<string, Transform> players = new Dictionary<string, Transform>();
 
     private void Awake()
     {
         NetworkEventManager.onInitMessage += RebuildOnInit;
+        NetworkEventManager.onMoveMessage += OnMoveMessage;
+    }
+
+
+    private void CreateBothPlayers()
+    {
+        players.Add("p1", SpawnPlayerAtRandomPos());
+        players.Add("p2", SpawnPlayerAtRandomPos());
+    }
+
+    private Transform SpawnPlayerAtRandomPos()
+    {
+        var pX = getRandom.Next(_tiles.Count);
+        var pY = getRandom.Next(_tiles[pX].Count);
+        return Instantiate(playerPrefab, _tiles[pX][pY].Pos, Quaternion.identity);
+    }
+
+    private void OnMoveMessage(MoveMessage msg)
+    {
+        players[msg.player].GetComponent<PlayerScript>().AddWaypoint(_tiles[msg.x][msg.y].Pos);
     }
 
     private void RebuildOnInit(InitMessage msg)
     {
+        ClearBoardAndPlayers();
         _tiles = TileHelper.ConvertMsgToLogicTiles(msg.tiles, transform.position, spacingX, spacingY);
         GenerateBoardTiles(_tiles);
+        CreateBothPlayers();
         onGameBoardRebuild?.Invoke(msg.tiles.Count, msg.tiles[0].Count, spacingX, spacingY);
     }
 
-    private void GenerateBoardTiles(IEnumerable<List<LogicTile>> tiles)
+    private void ClearBoardAndPlayers()
     {
-        foreach (var tile in tiles.SelectMany(xList => xList))
+        _tiles = new List<List<LogicTile>>();
+        tileInstances.ForEach(Destroy);
+        foreach (var player in players.Values)
         {
-            tileInstances.Add(InstantiatePrefabAtPosition(tile.Pos, tile.TileType));
+            Destroy(player);
+        }
+    }
+
+    private void GenerateBoardTiles(List<List<LogicTile>> tiles)
+    {
+        for (var x = 0; x < tiles.Count; x++)
+        {
+            for (var y = 0; y < tiles[x].Count; y++)
+            {
+                var tilePrefab = InstantiatePrefabAtPosition(tiles[x][y].Pos, tiles[x][y].TileType);
+                tileInstances.Add(tilePrefab);
+                if (x == 0 || y == 0 || x + 1 == tiles.Count || y + 1 == tiles[x].Count)
+                {
+                    tilePrefab.GetComponent<TileScript>().addEarthPart();
+                }
+            }
         }
     }
 

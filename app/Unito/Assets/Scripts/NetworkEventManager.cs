@@ -45,7 +45,7 @@ public class NetworkEventManager : MonoBehaviour
     {
         if (_messageQueue == null || _messageQueue.Count <= 0) return;
         var json = _messageQueue.Dequeue();
-        var msg = JsonUtility.FromJson<Message>(json);
+        var msg = JsonConvert.DeserializeObject<Message>(json);
         Debug.Log(msg.msgType);
         TriggerEventOnMessageType(msg.msgType, json);
         
