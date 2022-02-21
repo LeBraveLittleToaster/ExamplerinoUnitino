@@ -38,28 +38,52 @@ public class SimpleCameraController : MonoBehaviour
     }
 
     float prevDistance;
-
+    
+    // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
     private void Update()
     {
         var posTarget = target.transform.position;
+        
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            posTarget.x -= moveSpeed * Time.deltaTime;
+            var cameraRight = GetCameraRightNormalized();
+            posTarget +=  cameraRight * (moveSpeed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            posTarget.x += moveSpeed * Time.deltaTime;
+            // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
+            var cameraLeft = GetCameraRightNormalized() * -1;
+            
+            posTarget += cameraLeft * (moveSpeed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            posTarget.z -= moveSpeed * Time.deltaTime;
+            var cameraForward = GetCameraForwardNormalized();
+            posTarget += cameraForward * (moveSpeed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
-            posTarget.z += moveSpeed * Time.deltaTime;
+            var cameraForward = GetCameraForwardNormalized();
+            posTarget -= cameraForward * (moveSpeed * Time.deltaTime);
         }
 
         target.transform.position = posTarget;
+    }
+
+    private static Vector3 GetCameraForwardNormalized()
+    {
+        var cameraForward = Camera.main.transform.forward;
+        cameraForward.y = 0;
+        cameraForward = cameraForward.normalized;
+        return cameraForward;
+    }
+    
+    private static Vector3 GetCameraRightNormalized()
+    {
+        var cameraForward = Camera.main.transform.right;
+        cameraForward.y = 0;
+        cameraForward = cameraForward.normalized;
+        return cameraForward;
     }
 
     void LateUpdate()
