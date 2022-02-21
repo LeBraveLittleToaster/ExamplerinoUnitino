@@ -5,7 +5,7 @@ using Random = System.Random;
 public class TileScript : MonoBehaviour
 {
     private static readonly Random getRandom = new Random();
-    
+
     [SerializeField] private Transform prefabEarthPart;
     [SerializeField] private Vector3 scale = new Vector3(.2f, .2f, .2f);
 
@@ -23,11 +23,19 @@ public class TileScript : MonoBehaviour
     private Transform earth;
     private List<Transform> buildings = new List<Transform>();
     private List<Transform> entities = new List<Transform>();
+    public int XIndex { get; private set; }
+    public int YIndex { get; private set; }
 
     void Start()
     {
         SpawnBuildings();
         SpawnEntities();
+    }
+
+    public void InitXYIndexes(int x, int y)
+    {
+        XIndex = x;
+        YIndex = y;
     }
 
     private void SpawnBuildings()
@@ -57,7 +65,7 @@ public class TileScript : MonoBehaviour
         return instance;
     }
 
-    public void addEarthPart()
+    public void AddEarthPart()
     {
         if (earth == null)
         {

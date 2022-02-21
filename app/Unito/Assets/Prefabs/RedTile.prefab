@@ -638,6 +638,8 @@ MonoBehaviour:
   environmentEntities: 1
   buildingScale: {x: 0.2, y: 0.2, z: 0.2}
   entityScale: {x: 0.2, y: 0.2, z: 0.2}
+  buildingsWithRandomRotation: 1
+  entitesWithRandomRotation: 1
 --- !u!1 &8058307218480277564
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,3 +804,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4203866961909890, guid: f65aca722d376524dbffaaa0c52c6c6d, type: 3}
   m_PrefabInstance: {fileID: 4863009971998256080}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4861942419385392128 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1679036027631568, guid: f65aca722d376524dbffaaa0c52c6c6d, type: 3}
+  m_PrefabInstance: {fileID: 4863009971998256080}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7351916836451914827
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4861942419385392128}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 0.4763613, z: 5}
+  m_Center: {x: 0, y: -0.19423394, z: 0}
+--- !u!114 &4562148350220491080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4861942419385392128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6b594b5ac79c6042bb8f48c0ecf43e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hightLightColor: {r: 1, g: 0, b: 0, a: 1}

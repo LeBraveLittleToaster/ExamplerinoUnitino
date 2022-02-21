@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
+// ReSharper disable Unity.PerformanceAnalysis
 public class GameBoardScript : MonoBehaviour
 {
     private static readonly System.Random getRandom = new System.Random();
@@ -41,11 +42,13 @@ public class GameBoardScript : MonoBehaviour
         return Instantiate(playerPrefab, _tiles[pX][pY].Pos, Quaternion.identity);
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     private void OnMoveMessage(MoveMessage msg)
     {
         players[msg.player].GetComponent<PlayerScript>().AddWaypoint(_tiles[msg.x][msg.y].Pos);
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     private void RebuildOnInit(InitMessage msg)
     {
         ClearBoardAndPlayers();
@@ -64,7 +67,7 @@ public class GameBoardScript : MonoBehaviour
             Destroy(player);
         }
     }
-
+    
     private void GenerateBoardTiles(List<List<LogicTile>> tiles)
     {
         for (var x = 0; x < tiles.Count; x++)
@@ -72,10 +75,11 @@ public class GameBoardScript : MonoBehaviour
             for (var y = 0; y < tiles[x].Count; y++)
             {
                 var tilePrefab = InstantiatePrefabAtPosition(tiles[x][y].Pos, tiles[x][y].TileType);
+                tilePrefab.GetComponent<TileScript>().InitXYIndexes(x,y);
                 tileInstances.Add(tilePrefab);
                 if (x == 0 || y == 0 || x + 1 == tiles.Count || y + 1 == tiles[x].Count)
                 {
-                    tilePrefab.GetComponent<TileScript>().addEarthPart();
+                    tilePrefab.GetComponent<TileScript>().AddEarthPart();
                 }
             }
         }
