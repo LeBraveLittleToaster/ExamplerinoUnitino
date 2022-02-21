@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class SimpleCameraController : MonoBehaviour
 {
+    [SerializeField] private float moveSpeed = 1;
     public GameObject target;
     public float distance = 10.0f;
 
@@ -37,6 +38,29 @@ public class SimpleCameraController : MonoBehaviour
     }
 
     float prevDistance;
+
+    private void Update()
+    {
+        var posTarget = target.transform.position;
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            posTarget.x -= moveSpeed * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            posTarget.x += moveSpeed * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        {
+            posTarget.z -= moveSpeed * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            posTarget.z += moveSpeed * Time.deltaTime;
+        }
+
+        target.transform.position = posTarget;
+    }
 
     void LateUpdate()
     {
