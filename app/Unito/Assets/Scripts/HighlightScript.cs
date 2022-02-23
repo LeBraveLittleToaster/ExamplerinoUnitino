@@ -19,7 +19,7 @@ public class HighlightScript : MonoBehaviour
         _renderer = GetComponent<Renderer>();
         _baseColor = _renderer.material.color;
     }
-
+    // The following three methods need an attached collider to work, cause they belong to the physics part of unity
     private void OnMouseUp()
     {
         onTileClicked?.Invoke(_tile.XIndex, _tile.YIndex);

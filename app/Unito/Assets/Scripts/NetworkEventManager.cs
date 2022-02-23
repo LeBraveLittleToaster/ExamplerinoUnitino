@@ -18,6 +18,10 @@ public class NetworkEventManager : MonoBehaviour
 
     public static event OnInitMessage onInitMessage;
 
+    /// <summary>
+    /// This queue is needed to break the multithread problem caused by unity beeing single threaded
+    /// The queue is only read from the mainthread (in the Update funtion) and can be filled by other threads
+    /// </summary>
     private Queue<string> _messageQueue = new Queue<string>();
 
     WebSocket ws;
@@ -38,6 +42,7 @@ public class NetworkEventManager : MonoBehaviour
         {
             return;
         }
+        // Check if queue is empty and if not send events based on the message type
         RunMessageQueue();
     }
 
@@ -45,8 +50,11 @@ public class NetworkEventManager : MonoBehaviour
     {
         if (_messageQueue == null || _messageQueue.Count <= 0) return;
         var json = _messageQueue.Dequeue();
+        // first parse the base message object to get the message type
+        // It is important to use the JsonConvert instead of the JsonUtility from Unity, otherwise enum are broken
         var msg = JsonConvert.DeserializeObject<Message>(json);
         Debug.Log(msg.msgType);
+        // parse the message a second time with the specific message object
         TriggerEventOnMessageType(msg.msgType, json);
         
     }
@@ -67,6 +75,11 @@ public class NetworkEventManager : MonoBehaviour
         }
     }
 }
+
+// From here are the objects that can be send via the network
+// Normally you store them in seperate class files and reference them, also they are normally larger
+// It is important to add the [Serializable] above to mark them as json parsable
+
 [Serializable]
 public enum MessageType
 {
