@@ -12,9 +12,9 @@ public class PlayerScript : MonoBehaviour
     private List<Vector3> waypoints = new List<Vector3>();
 
 
-    public void AddWaypoint(Vector3 waypoint)
+    public void AddWaypoints(IEnumerable<Vector3> waypoint)
     {
-        waypoints.Add(waypoint);
+        waypoints.AddRange(waypoint);
     }
     
     private void Update()

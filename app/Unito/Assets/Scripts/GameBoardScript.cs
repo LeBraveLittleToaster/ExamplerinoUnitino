@@ -56,7 +56,11 @@ public class GameBoardScript : MonoBehaviour
     /// <param name="msg">Move message parsed from server send message</param>
     private void OnMoveMessage(MoveMessage msg)
     {
-        players[msg.player].GetComponent<PlayerScript>().AddWaypoint(_tiles[msg.x][msg.y].Pos);
+        var playerScript = players[msg.player].GetComponent<PlayerScript>();
+        var playerPos = playerScript.transform.position;
+        var tilePos = _tiles[msg.x][msg.y].Pos;
+        var intermediatePos = new Vector3(tilePos.x, playerPos.y, playerPos.z);
+        playerScript.AddWaypoints(new List<Vector3>(){playerPos, intermediatePos, tilePos});
     }
 
     /// <summary>
