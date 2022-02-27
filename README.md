@@ -5,17 +5,21 @@
 
 # App
 
-    --> WARNING <--
+__WARNING: The three asset packs in this project ("PolygonXY" folders) are only licensed to me and so should never be used in any non-commercial nor commercial use, replace these if you want to publish this in any way.__
 
-    The three asset packs in this project ("PolygonXY" folders) are only licensed to me and so should never be used in any non-commercial nor commercial use, replace these if you want to publish this in any way.
+__Unity Version:__ 2020.3.25f , URP Workflow
 
-Unity Version: 2020.3.25f , URP Workflow
 
-    The Unity app contains out of a simple SampleScene that connects via WebSocket to the cli tool and receives an InitMessage. Based on this InitMessage, the gameboard will be populated based on the send, randomly generated, data.
-    Please look up the "Prefab" system and what it does.
-    The scripts are documented and explain what each class does, you can find all scripts in the "app/Assets/Scripts" directory. For more questions, create an issue.
+The Unity app contains out of a simple SampleScene that connects via WebSocket to the cli tool and receives an InitMessage. Based on this InitMessage, 
+the gameboard will be populated based on the send, randomly generated, data.
+Please look up the "Prefab" system and what it does.
+The scripts are documented and explain what each class does, 
+you can find all scripts in the "app/Assets/Scripts" directory. 
 
-Functionality of the client are the following:
+For more questions, create an issue.
+
+
+*Functionality of the client are the following:*
 1. Event based Gameboard creation
 2. Randomized asset placement on fixed positions in the tile prefab
 3. Tile highlighting on mouse over
@@ -35,12 +39,13 @@ Functionality of the client are the following:
 
 # Cli
 
-    -->WARNING<-- 
-    This code is absolutely horrible, do not take this as an example for good javascript code in any way! This is quick and very dirty stuff for testing only! !!IMPORTANT!!
 
-Nodejs Version: v16.7.0
+__WARNING: This code is absolutely horrible, do not take this as an example for good javascript code in any way! 
+This is quick and very dirty stuff for testing only!__
 
-    The cli is a basic command line tool to setup a websocket server the client can connect to. You can choose in the command line if you want to send p1 or p2 to a new location by switching with your arrow keys and pressing enter. The position is printed to the console and after a fake delay, the event is send to the client via WebSocket as MoveMessage.
+__Nodejs Version:__ v16.7.0
+
+The cli is a basic command line tool to setup a websocket server the client can connect to. You can choose in the command line if you want to send p1 or p2 to a new location by switching with your arrow keys and pressing enter. The position is printed to the console and after a fake delay, the event is send to the client via WebSocket as MoveMessage.
 
 ## Installation
 1. Check that the client is not running, start the server first. You can let it run even after closing the client.
@@ -57,16 +62,17 @@ If you feel confident enough, you can try to add these features to the game. The
 
 ## [C#] Implement a select and command functionality
 
-    Take the example "MockOnClickedEventManager" script and add an differentiation between click on a player and a tile. 
 
-    Then implement the functionality to select a character, track which character is selected.
+Take the example "MockOnClickedEventManager" script and add an differentiation between click on a player and a tile. 
 
-    Add the possibility to print to the console "Character Z will be send to coordinates X/Y" when first a player and second a tile is selected.
+Then implement the functionality to select a character, track which character is selected.
 
-    Equal to the "HighlightScript" add a highlight to the selected player.
+Add the possibility to print to the console "Character Z will be send to coordinates X/Y" when first a player and second a tile is selected.
+
+Equal to the "HighlightScript" add a highlight to the selected player.
 
 ## [C#] Move one by on instead of diagonal (characters)
-    Move only up and down on the tiles with your character
+Move only up and down on the tiles with your character
 
 ## [JS + C#] Random Position Server sided
-    Compute and send a random position in the init message instead of placing the heroes in random positions on client side
+Compute and send a random position in the init message instead of placing the heroes in random positions on client side
