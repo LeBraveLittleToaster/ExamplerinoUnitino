@@ -2,29 +2,29 @@ using UnityEngine;
 
 public class TerrainGenerator : MonoBehaviour
 {
-    public int width = 256; //x-axis of the terrain
-    public int height = 256; //z-axis
+    [SerializeField] private Terrain _terrain;
+    [SerializeField] private int width = 256; //x-axis of the terrain
+    [SerializeField] private int height = 256; //z-axis
 
-    public float sinWaveLength = 1;
-    public float sinWaveAmplitude = 1;
+    [SerializeField] private float sinWaveLength = 1;
+    [SerializeField] private float sinWaveAmplitude = 1;
     
-    public int depth = 20; //y-axis
+    [SerializeField] private int depth = 20; //y-axis
 
-    public float scale = 20f;
+    [SerializeField] private float scale = 20f;
 
-    public float offsetX = 0f;
-    public float offsetY = 0f;
+    [SerializeField] private float offsetX = 0f;
+    [SerializeField] private float offsetY = 0f;
 
     private void Start()
     {
-        //offsetX = Random.Range(0f, 9999f);
-        //offsetY = Random.Range(0f, 9999f);
+        offsetX = Random.Range(0f, 9999f);
+        offsetY = Random.Range(0f, 9999f);
     }
 
     private void Update()
     {
-        Terrain terrain = GetComponent<Terrain>();
-        terrain.terrainData = GenerateTerrain(terrain.terrainData);
+        _terrain.terrainData = GenerateTerrain(_terrain.terrainData);
     }
 
     TerrainData GenerateTerrain (TerrainData terrainData)

@@ -332,11 +332,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c53aaf956b9057479cad20c4816e2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _terrain: {fileID: 374383525}
   width: 128
   height: 128
   sinWaveLength: 0.15
   sinWaveAmplitude: 0.28
-  depth: 0
+  depth: 12
   scale: 5.18
   offsetX: 0
   offsetY: 0
@@ -586,5 +587,10 @@ PrefabInstance:
       propertyPath: _terrain
       value: 
       objectReference: {fileID: 374383525}
+    - target: {fileID: 7874161975660170226, guid: add051b3bcd3d7e4bb620cd7b7bb8743,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: add051b3bcd3d7e4bb620cd7b7bb8743, type: 3}

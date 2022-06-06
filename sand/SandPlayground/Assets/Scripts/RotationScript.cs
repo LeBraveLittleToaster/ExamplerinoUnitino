@@ -6,12 +6,9 @@ public class RotationScript : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed = 125f;
 
-    private float curRot = 0f;
-
-    // Update is called once per frame
     void Update()
     {
-        curRot += rotationSpeed * Time.deltaTime;
-        transform.rotation = Quaternion.Euler(0,0,curRot);
+        var transform1 = transform;
+        transform.RotateAround(transform1.position, transform1.forward, rotationSpeed * Time.deltaTime);
     }
 }
