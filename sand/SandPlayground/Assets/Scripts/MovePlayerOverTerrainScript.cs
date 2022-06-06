@@ -41,7 +41,7 @@ public class MovePlayerOverTerrainScript : MonoBehaviour
         if (waypoints.Count == 0) return;
         var curPos = transform.position;
         var target = waypoints.Peek();
-        if (Vector3.Distance(curPos, target) < reachedWaypointDistance)
+        if (Vector3.Distance(new Vector3(curPos.x, 0, curPos.z), new Vector3(target.x, 0, target.z)) < reachedWaypointDistance)
         {
             Debug.Log("Waypoints reached");
             waypoints.Dequeue();
@@ -51,7 +51,7 @@ public class MovePlayerOverTerrainScript : MonoBehaviour
             transform.position = Vector3.MoveTowards(curPos, target, moveSpeed * Time.deltaTime);
             if (rotatePlayer)
             {
-                transform.rotation = Quaternion.LookRotation(target - curPos);
+                transform.rotation = Quaternion.LookRotation(new Vector3(target.x, 0, target.z) - new Vector3(curPos.x, 0, curPos.z));
             }
         }
     }

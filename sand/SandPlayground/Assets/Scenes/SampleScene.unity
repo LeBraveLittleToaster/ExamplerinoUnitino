@@ -592,5 +592,10 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7874161975660170226, guid: add051b3bcd3d7e4bb620cd7b7bb8743,
+        type: 3}
+      propertyPath: reachedWaypointDistance
+      value: 0.01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: add051b3bcd3d7e4bb620cd7b7bb8743, type: 3}

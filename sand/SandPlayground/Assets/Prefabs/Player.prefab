@@ -810,7 +810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _terrain: {fileID: 0}
-  rotatePlayer: 0
+  rotatePlayer: 1
   moveSpeed: 10
   reachedWaypointDistance: 0.1
 --- !u!1 &7755322788798330904

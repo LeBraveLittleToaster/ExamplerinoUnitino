@@ -29,6 +29,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 616c0e928a040c049bce46a6894990ac, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_2c5cb919b8864971bf43df2228eb59f9_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 616c0e928a040c049bce46a6894990ac, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_33a70a1cd8864406986c762f7fc548c9_Texture_1:
         m_Texture: {fileID: 2800000, guid: 616c0e928a040c049bce46a6894990ac, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -65,16 +69,19 @@ Material:
     m_Floats:
     - _BlendFactor: 0.84
     - _BlendHeight: 4.38
-    - _BlendRange: 3.07
-    - _BlendStartHeight: 7.42
-    - _DirtNormalScale: 1.01
+    - _BlendRange: 5.03
+    - _BlendStartHeight: 7.6
+    - _DirtNormalScale: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SandNormalScale: 1
+    - _SandNormalScale: 50
+    - _SandSpeed: 0.02
     - _Tiling: 50
     - _TilingDirt: 1
     - _TilingSand: 1
     - _TopLayerOpacityMultiplier: 0.267
+    - _WanderingSandNormalScale: 0.32
+    - _WanderingSandOpacity: 0.384
     m_Colors:
     - _BlendHeightRange: {r: 2.4, g: 13, b: 0, a: 0}
   m_BuildTextureStacks: []
