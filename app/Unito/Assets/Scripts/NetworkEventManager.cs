@@ -29,11 +29,12 @@ public class NetworkEventManager : MonoBehaviour
     void Start()
     {
         ws = new WebSocket("ws://localhost:1324");
-        ws.Connect();
+        
         ws.OnMessage += (sender, e) =>
         {
             _messageQueue.Enqueue(e.Data); // Queue fixes multithreading problem
         };
+        ws.Connect();
     }
 
     void Update()
